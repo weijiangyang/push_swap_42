@@ -6,7 +6,7 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:23:27 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/04 17:19:47 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/04 19:05:42 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,8 +177,8 @@ int sort(t_list **list_a, t_list **list_b)
                 }
                 else
                 {
-                        count_actions++;
-                        ra(list_a);
+                        	ra(list_a);
+				count_actions++;
                 }
                 if (count_in_b == limit) // passer au prochain chunk
                         current_chunk++;
