@@ -6,13 +6,11 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:14:11 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/03 14:56:14 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/04 14:45:32 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "push_swap.h"
 
 //creation du nouveau noeud
 
@@ -93,6 +91,11 @@ void assign_indexes(t_list *lst)
         int     rank;
 
         tmp1 = lst;
+	if (!lst)
+	{
+    		printf("assign_indexes: list is NULL\n");
+    		return;
+	}
         while (tmp1)
         {
                 rank = 0;
@@ -147,6 +150,7 @@ t_list	*parse_list(int argc, char **argv)
 		printf("Error:duplicated detected");
 		return (NULL);
 	}
-	return (assign_indexes(list));
+	assign_indexes(list);
+	return (list);
 }
 

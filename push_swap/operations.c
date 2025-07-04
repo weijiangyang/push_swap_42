@@ -6,9 +6,11 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:59:17 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/04 10:11:12 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/04 13:31:30 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap.h"
 
 void	swap(t_list **list)
 {
@@ -50,7 +52,7 @@ void	pa(t_list **list_a, t_list **list_b)
 	if (!*list_b)
 		return ;
 	list_first_b = *list_b;
-	*list_b = *list_b->next;
+	*list_b = (*list_b)->next;
 	list_first_b->next = *list_a;
 	*list_a = list_first_b;
 	write (1, "pa\n", 3);
@@ -63,7 +65,7 @@ void    pb(t_list **list_b, t_list **list_a)
         if (!*list_a)
                 return ;
         list_first_a = *list_a;
-        *list_a = *list_a->next;
+        *list_a = (*list_a)->next;
         list_first_a->next = *list_b;
         *list_b = list_first_a;
 	write(1, "pb\n", 3);
@@ -144,4 +146,15 @@ void	rrr(t_list **list_a, t_list **list_b)
 	write(1, "rrr\n", 4);
 }
 	
+int	ft_list_size(t_list *list)
+{
+	int	len;
 
+	len = 0;
+	while (list)
+	{
+		len++;
+		list = list -> next;
+	}
+	return (len);
+}
