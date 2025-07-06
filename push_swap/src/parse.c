@@ -6,7 +6,7 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:14:11 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/06 10:56:50 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/06 17:07:14 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_list *new_node(int value)
 	new_node->value = value;
 	new_node->index = -1;
 	new_node->next = NULL;
+	new_node->prev = NULL;
 	return (new_node);
 }
 
@@ -141,6 +142,7 @@ t_list	*parse_list(int argc, char **argv)
 		else
 		{
 			last -> next = new;
+			new -> prev = last;
 			last = new;
 		}
 		i++;
