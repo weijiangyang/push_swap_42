@@ -6,7 +6,7 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 13:34:02 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/04 18:56:23 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/06 10:45:08 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ int main(int argc, char **argv)
 {
     t_list  *list;
     t_list  *list_b;
-    int		count;
+//   int		count;
 
     list = parse_list(argc, argv);  // <- parse_list doit retourner un t_list *
     list_b = NULL;
 
-	count =   sort(&list, &list_b);  // <- on passe les adresses car sort attend t_list **
+  sort(&list, &list_b);  // <- on passe les adresses car sort attend t_list **
 
-    while (list)
+/*    while (list)
     {
         printf("%d\n", list->value);
         list = list->next;
     }
-    printf("il faut %d fois d'oeperations", count);
+    printf("il faut %d fois d'oeperations", count);*/
     return (0);
 }
 

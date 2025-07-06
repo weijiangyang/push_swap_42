@@ -6,11 +6,11 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:23:27 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/04 19:05:42 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/06 15:24:18 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 int is_sorted_asc(t_list *list)
 {
@@ -68,13 +68,13 @@ int count_max_bits(t_list *list)
         return (max_bits);
 }
 
-int     bring_max_to_top(t_list **list, int max_index)
+int bring_max_to_top(t_list **list, int max_index)
 {
-        int     size;
-        int     pos;
-        t_list  *current;
-        int     i;
-        int     count;
+        int size;
+        int pos;
+        t_list *current;
+        int i;
+        int count;
 
         count = 0;
         i = 0;
@@ -105,7 +105,6 @@ int     bring_max_to_top(t_list **list, int max_index)
                 }
         }
         return (count);
-
 }
 
 /*int	sort(t_list **list_a, t_list **list_b)
@@ -152,6 +151,7 @@ int     bring_max_to_top(t_list **list, int max_index)
         return (count);
 }*/
 
+// chunk 
 int sort(t_list **list_a, t_list **list_b)
 {
         int     list_size = ft_list_size(*list_a);
@@ -172,8 +172,8 @@ int sort(t_list **list_a, t_list **list_b)
                         if ((*list_b)->index < limit - (chunk_size / 2))
                         {
                                 count_actions++;
-                                ra(list_b); // pour mieux répartir
-                        }   
+                                rb(list_b); // pour mieux répartir
+                        } 
                 }
                 else
                 {
@@ -189,9 +189,11 @@ int sort(t_list **list_a, t_list **list_b)
         while (*list_b)
         {
                 int max = get_max_index(*list_b);
-                bring_max_to_top(list_b, max);
+                count_actions += bring_max_to_top(list_b, max);
                 pa(list_a, list_b);
                 count_actions++;
         }
         return (count_actions);
 }
+
+

@@ -6,7 +6,7 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:09:34 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/04 16:45:00 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/06 15:32:00 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef	struct	s_list
 	int	value;
 	int	index;
 	struct s_list	*next;
+	struct s_list	*prev;
 }	t_list;
 
 void    swap(t_list **list);

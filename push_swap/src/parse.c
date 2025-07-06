@@ -6,11 +6,11 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:14:11 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/04 14:45:32 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/06 10:56:50 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 //creation du nouveau noeud
 
