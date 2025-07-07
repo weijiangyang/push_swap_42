@@ -6,7 +6,7 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:23:27 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/07 17:43:32 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/07 18:05:23 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,40 @@ int bring_max_to_top(t_list **list, int max_index)
         return (count);
 }*/
 
+int	find_min_move(t_list *list, int min, int max)
+{
+	int	move_top;
+	int	move_bottom;
+	t_list	*current;
+	t_list	*last;
+
+	current = list;
+	last = list;
+	move_top = 0;
+	move_bottom = 0;
+	while (current && !(current->index >= min && current->index < max))
+	{
+		move_top ++;
+		current = current -> next;
+	} 
+	while (last->next)
+		last = last -> next;
+	while (last && !(current->index >= min && current->index < max))
+	{
+		move_bottom ++;
+		last = last -> prev;
+	}
+	if (move_top >= move_bottom)
+		return (1);
+	else
+		return (-1);
+}
+	
 // chunk 
 int sort(t_list **list_a, t_list **list_b)
 {
         int     list_size = ft_list_size(*list_a);
-        int chunk_size = list_size / 5;
+        int chunk_size = list_size / 20;
         int current_chunk = 1;
         int limit = chunk_size * current_chunk;
         int    count_in_b = 0;
@@ -160,7 +189,10 @@ int sort(t_list **list_a, t_list **list_b)
                 }
                 else
                 {
-                        	count_actions += ra(list_a);
+				if (find_min_move(*list_a,  limit - chunk_size , limit) == 1)
+                        		count_actions += ra(list_a);
+				else
+					count_actions += rra(list_a);
                 }
                 if (count_in_b == limit) // passer au prochain chunk
                         current_chunk++;
