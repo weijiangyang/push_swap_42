@@ -6,7 +6,7 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:23:27 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/06 15:24:18 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/07 17:43:32 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,6 @@ int get_max_index(t_list *list)
                 first = first->next;
         }
         return (max_index);
-}
-
-int count_max_bits(t_list *list)
-{
-        int max_bits;
-        int max_index;
-        t_list *first;
-
-        max_bits = 0;
-        first = list;
-        if (!first)
-                return (0);
-        max_index = get_max_index(list);
-        while ((max_index >> max_bits) != 0)
-                max_bits++;
-        return (max_bits);
 }
 
 int bring_max_to_top(t_list **list, int max_index)
@@ -166,19 +150,17 @@ int sort(t_list **list_a, t_list **list_b)
         {
                 if ((*list_a)->index <= limit)
                 {
-                        pb(list_b, list_a);
+                        pb(list_a, list_b);
                         count_in_b++;
                         count_actions++;
                         if ((*list_b)->index < limit - (chunk_size / 2))
                         {
-                                count_actions++;
-                                rb(list_b); // pour mieux répartir
+                                count_actions += rb(list_b); // pour mieux répartir
                         } 
                 }
                 else
                 {
-                        	ra(list_a);
-				count_actions++;
+                        	count_actions += ra(list_a);
                 }
                 if (count_in_b == limit) // passer au prochain chunk
                         current_chunk++;
@@ -190,7 +172,7 @@ int sort(t_list **list_a, t_list **list_b)
         {
                 int max = get_max_index(*list_b);
                 count_actions += bring_max_to_top(list_b, max);
-                pa(list_a, list_b);
+                count_actions += pa(list_a, list_b);
                 count_actions++;
         }
         return (count_actions);
