@@ -12,25 +12,23 @@
 
 #include "push_swap.h"
 
-#include "push_swap.h"
-
 int main(int argc, char **argv)
 {
     t_list  *list;
     t_list  *list_b;
-//   int		count;
+    int   count;
+  
 
     list = parse_list(argc, argv);  // <- parse_list doit retourner un t_list *
     list_b = NULL;
 
-  sort(&list, &list_b);  // <- on passe les adresses car sort attend t_list **
+  count = sort(&list, &list_b);  // <- on passe les adresses car sort attend t_list **
 
-/*    while (list)
+   while (list)
     {
         printf("%d\n", list->value);
         list = list->next;
     }
-    printf("il faut %d fois d'oeperations", count);*/
+    printf("il faut %d fois d'oeperations", count);
     return (0);
 }
-

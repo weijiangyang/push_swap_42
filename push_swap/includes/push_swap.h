@@ -6,7 +6,7 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:09:34 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/12 10:47:03 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/12 14:25:31 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <limits.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef	struct	s_list
 {

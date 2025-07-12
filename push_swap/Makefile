@@ -6,7 +6,7 @@
 #    By: weiyang <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/04 13:24:39 by weiyang           #+#    #+#              #
-#    Updated: 2025/07/06 11:32:50 by weiyang          ###   ########.fr        #
+#    Updated: 2025/07/12 17:39:59 by weiyang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,4 +36,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+.PHONY: all clean fclean re
 
