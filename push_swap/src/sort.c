@@ -6,33 +6,11 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:23:27 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/07 18:27:32 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/12 12:10:30 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-int is_sorted_asc(t_list *list)
-{
-        while (list && list->next)
-        {
-                if (list->index > list->next->index)
-                        return (0);
-                list = list->next;
-        }
-        return (1);
-}
-
-int is_sorted_desc(t_list *list)
-{
-        while (list && list->next)
-        {
-                if (list->index < list->next->index)
-                        return (0);
-                list = list->next;
-        }
-        return (1);
-}
 
 int get_max_index(t_list *list)
 {
@@ -91,100 +69,22 @@ int bring_max_to_top(t_list **list, int max_index)
         return (count);
 }
 
-/*int	sort(t_list **list_a, t_list **list_b)
-{
-        int	size;
-        int	i;
-        int	max_bits;
-        int	j;
-        int	count;
-
-        count = 0;
-        max_bits = count_max_bits(*list_a);
-        j = 0;
-
-        while (j < max_bits)
-        {
-                i = 0;
-                size = ft_list_size(*list_a);
-                while(i < size)
-                {
-                        if (is_sorted_asc(*list_a))
-                                break;
-                        if (((*list_a)->index >> j)& 1)
-                        {
-                                ra(list_a);
-                                count++;
-                        }
-                        else
-                        {
-                                if (i == size -1 )
-                                        break;
-                                pb(list_b, list_a);
-                                count++;
-                        }
-                        i++;
-                }
-                while (*list_b)
-                {
-                        pa(list_a, list_b);
-                        count++;
-                }
-                j++;
-        }
-        return (count);
-}*/
-
-int     find_min_move(t_list *list, int min, int max)
-{
-        int     move_top;
-        int     move_bottom;
-        t_list  *current;
-        t_list  *last;
-
-        current = list;
-        last = list;
-        move_top = 0;
-        move_bottom = 0;
-
-        // Parcours depuis le début
-        while (current && !(current->index >= min && current->index < max))
-        {
-                move_top++;
-                current = current->next;
-        }
-
-        // Aller à la fin de la liste
-        while (last && last->next)
-                last = last->next;
-
-        // Parcours depuis la fin
-        while (last && !(last->index >= min && last->index < max))
-        {
-                move_bottom++;
-                last = last->prev;
-        }
-
-        if (move_top <= move_bottom)
-                return (1);
-        else
-                return (-1);
-}
 	
 // chunk 
 int sort(t_list **list_a, t_list **list_b)
 {
         int     list_size = ft_list_size(*list_a);
-        int chunk_size = list_size / 5;
-        int current_chunk = 1;
-        int limit = chunk_size * current_chunk;
-        int    count_in_b = 0;
+        int	chunk_size = list_size / 5;
+        int 	current_chunk = 1;
+        int 	limit = chunk_size * current_chunk;
+        int    	count_in_b = 0;
         int     count_actions;
+	int	max;
 
         count_actions = 0;
         while (*list_a)
         {
-                if ((*list_a)->index <= limit)
+                if ((*list_a)->index < limit)
                 {
                         pb(list_a, list_b);
                         count_in_b++;
@@ -198,7 +98,7 @@ int sort(t_list **list_a, t_list **list_b)
                 {
                         		count_actions += ra(list_a);
                 }
-                if (count_in_b == limit) // passer au prochain chunk
+		if (count_in_b >= chunk_size * current_chunk)  // passer au prochain chunk
                         current_chunk++;
                 limit = chunk_size * current_chunk;
         }
@@ -206,14 +106,14 @@ int sort(t_list **list_a, t_list **list_b)
         // ensuite : vider B en mettant le max au top
         while (*list_b)
         {
-                int max = get_max_index(*list_b);
+		max = get_max_index(*list_b);
                 count_actions += bring_max_to_top(list_b, max);
                 count_actions += pa(list_a, list_b);
                 count_actions++;
         }
         return (count_actions);
 }
-
+/*
 非常好的问题！你的排序函数实现了 push_swap 项目的一个分块版本，这是一个坚实的基础。现在你可以使用“贪婪”方法对其进行优化，尤其是针对将元素从 list_b 移动到 list_a 的阶段（最终阶段）。
 🚀 目标：结合分块和贪婪策略
 
@@ -312,4 +212,50 @@ count_actions += greedy_sort(list_a, list_b);
 
 结合 rr / rrr 动作
 
-获得更高的动作得分
+获得更高的动作得分*/
+int	cal_pos_a(t_list *a, t_list *b)
+{
+	int	pos;
+	int	size;
+	int	pos_next_node;
+	t_list	*tmp;
+	int	min;
+	int	cost;
+	int	direction;
+
+	min = INT_MAX;
+	pos = 0;
+	size = ft_list_size(a);
+	tmp = a;
+	tmp = a;
+	while (tmp)
+	{
+		if (tmp->index > b->index && tmp->index < min)
+			min = tmp->index;
+		tmp = tmp->next;
+	}
+	if (min == INT_MAX)
+	{
+		tmp = a;
+		while (tmp)
+		{
+			if(tmp->index < min)
+				min = tmp -> index;
+			tmp = tmp->next;
+		}
+	}
+	tmp = a;
+	while (tmp)
+	{
+		if (tmp->index == min)
+			break;
+		pos++;
+		tmp = tmp->next;
+	}
+	if (pos < size / 2)
+		return (pos);
+	else
+		return (-(size - pos));	
+}
+			
+

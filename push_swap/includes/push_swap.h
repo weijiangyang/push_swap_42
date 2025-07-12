@@ -6,7 +6,7 @@
 /*   By: weiyang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:09:34 by weiyang           #+#    #+#             */
-/*   Updated: 2025/07/07 17:29:04 by weiyang          ###   ########.fr       */
+/*   Updated: 2025/07/12 10:47:03 by weiyang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ typedef	struct	s_list
 	struct s_list	*next;
 	struct s_list	*prev;
 }	t_list;
+
+typedef struct s_move
+{
+int cost_a;
+int cost_b;
+int total;
+int direction_a; // 1 = ra, -1 = rra
+int direction_b; // 1 = rb, -1 = rrb
+t_list *target_b; // 要移动的元素
+} t_move;
 
 int    swap(t_list **list);
 int    sa(t_list **list);
